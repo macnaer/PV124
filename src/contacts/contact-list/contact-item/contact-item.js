@@ -1,6 +1,22 @@
 import React from "react";
 
-const ContactItem = ({ name, phone, email, category }) => {
+const ContactItem = ({ name, phone, email, category, avatar }) => {
+  let categoryStyle = "lab lab-success";
+  switch (category) {
+    case "Work":
+      categoryStyle = "lab lab-success";
+      break;
+    case "Family":
+      categoryStyle = "lab lab-primary";
+      break;
+    case "Private":
+      categoryStyle = "lab lab-danger";
+      break;
+    default:
+      categoryStyle = "lab lab-warning";
+      break;
+  }
+
   return (
     <div className="unit">
       <div className="field name">
@@ -10,14 +26,9 @@ const ContactItem = ({ name, phone, email, category }) => {
           <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"></svg>
         </div>
         <div>
-          <img
-            src="https://bootdey.com/img/Content/avatar/avatar1.png"
-            alt="image"
-            className="avatar"
-          />{" "}
-          {name}
+          <img src={avatar} alt="image" className="avatar" /> {name}
         </div>
-        <div className="lab lab-warning">{category}</div>
+        <div className={categoryStyle}>{category}</div>
       </div>
       <div className="field phone">{phone}</div>
       <div className="field email">{email}</div>

@@ -13,6 +13,7 @@ class App extends React.Component {
         name: "Alexander Verdnam",
         phone: "+1-800-600-9898",
         email: "alex@email.com",
+        avatar: "https://bootdey.com/img/Content/avatar/avatar1.png",
         category: "Friends",
       },
       {
@@ -20,7 +21,16 @@ class App extends React.Component {
         name: "Emma Watson",
         phone: "+8-800-321-1234",
         email: "emma@email.com",
-        category: "Family",
+        avatar: "https://bootdey.com/img/Content/avatar/avatar3.png",
+        category: "Private",
+      },
+      {
+        id: 3,
+        name: "Bill Watson",
+        phone: "+8-800-321-1234",
+        email: "bill@email.com",
+        avatar: "https://bootdey.com/img/Content/avatar/avatar2.png",
+        category: "Private",
       },
     ],
   };
@@ -31,7 +41,7 @@ class App extends React.Component {
       <>
         <div className="container bootstrap snippets bootdeys bootdey">
           <div className="row decor-default">
-            <SideBar />
+            <SideBar List={List} />
             <ContactList List={List} />
           </div>
         </div>
