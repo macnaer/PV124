@@ -1,6 +1,6 @@
 import React from "react";
 
-const ContactItem = () => {
+const ContactItem = ({ name, phone, email, category }) => {
   return (
     <div className="unit">
       <div className="field name">
@@ -15,12 +15,12 @@ const ContactItem = () => {
             alt="image"
             className="avatar"
           />{" "}
-          Alexander Verdnam
+          {name}
         </div>
-        <div className="lab lab-warning">Friends</div>
+        <div className="lab lab-warning">{category}</div>
       </div>
-      <div className="field phone">+1-800-600-9898</div>
-      <div className="field email">example@gmail.com</div>
+      <div className="field phone">{phone}</div>
+      <div className="field email">{email}</div>
     </div>
   );
 };

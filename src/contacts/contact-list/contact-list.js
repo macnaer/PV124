@@ -2,12 +2,16 @@ import React from "react";
 import ContactItem from "./contact-item/contact-item";
 import Header from "../header/header";
 
-const ContactList = () => {
+const ContactList = ({ List }) => {
+  const item = List.map((contact) => {
+    return <ContactItem key={contact.id} {...contact} />;
+  });
+
   return (
     <div className="col-lg-9 col-md-8 col-sm-12">
       <div className="contacts-list">
         <Header />
-        <form className="ac-custom ac-checkbox ac-checkmark" autoComplete="off">
+        <div className="ac-custom ac-checkbox ac-checkmark">
           <div className="input-group">
             <input
               type="text"
@@ -30,11 +34,8 @@ const ContactList = () => {
             <div className="field phone">Phone</div>
             <div className="field email icons">Email</div>
           </div>
-          <ContactItem />
-          <ContactItem />
-          <ContactItem />
-          <ContactItem />
-        </form>
+          {item}
+        </div>
       </div>
     </div>
   );
