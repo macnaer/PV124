@@ -4,22 +4,38 @@ import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 
 import React from "react";
 
-const ContactItem = ({ name, phone, email, category, avatar, onDelete }) => {
-  let categoryStyle = "lab lab-success";
+const GetCaregoryStyle = (category) => {
+  let categoryStyle = "lab lab-success field";
   switch (category) {
     case "Work":
-      categoryStyle = "lab lab-success";
+      categoryStyle = "lab lab-success field";
       break;
     case "Family":
-      categoryStyle = "lab lab-primary";
+      categoryStyle = "lab lab-primary field";
       break;
     case "Private":
-      categoryStyle = "lab lab-danger";
+      categoryStyle = "lab lab-danger field";
       break;
     default:
-      categoryStyle = "lab lab-warning";
+      categoryStyle = "lab lab-warning field";
       break;
   }
+
+  return categoryStyle;
+};
+
+const ContactItem = ({
+  name,
+  phone,
+  email,
+  category,
+  avatar,
+  gender,
+  onDelete,
+}) => {
+  const URL = `https://randomuser.me/api/portraits/${gender}/${avatar}.jpg`;
+
+  const categoryStyle = GetCaregoryStyle(category);
 
   return (
     <div className="unit">
@@ -30,7 +46,7 @@ const ContactItem = ({ name, phone, email, category, avatar, onDelete }) => {
           <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"></svg>
         </div>
         <div>
-          <img src={avatar} alt="image" className="avatar" /> {name}
+          <img src={URL} alt="image" className="avatar" /> {name}
         </div>
         <div className={categoryStyle}>{category}</div>
       </div>
