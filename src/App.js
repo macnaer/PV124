@@ -4,6 +4,7 @@ import "./App.css";
 import SideBar from "./contacts/sidebar/sidebar";
 import ContactList from "./contacts/contact-list/contact-list";
 import React from "react";
+import { slice } from "lodash";
 
 class App extends React.Component {
   state = {
@@ -36,7 +37,16 @@ class App extends React.Component {
   };
 
   onDelete = (id) => {
-    console.log(`On delete ${id}`);
+    const { List } = this.state;
+    const index = List.findIndex((el) => el.id === id);
+    let tmpList = slice(List);
+    const tmpListPart1 = tmpList.splice(0, index);
+    const tmpListPart2 = tmpList.splice(index);
+    tmpList = [...tmpListPart1, ...tmpListPart2];
+
+    this.setState({
+      List: tmpList,
+    });
   };
 
   render() {
