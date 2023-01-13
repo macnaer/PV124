@@ -1,6 +1,10 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+
 import React from "react";
 
-const ContactItem = ({ name, phone, email, category, avatar }) => {
+const ContactItem = ({ name, phone, email, category, avatar, onDelete }) => {
   let categoryStyle = "lab lab-success";
   switch (category) {
     case "Work":
@@ -32,6 +36,15 @@ const ContactItem = ({ name, phone, email, category, avatar }) => {
       </div>
       <div className="field phone">{phone}</div>
       <div className="field email">{email}</div>
+      <div className="field icons-wrapper">
+        <FontAwesomeIcon icon={faEdit} size="2x" className="icons edit" />
+        <FontAwesomeIcon
+          onClick={onDelete}
+          icon={faTrashAlt}
+          size="2x"
+          className="icons delete"
+        />
+      </div>
     </div>
   );
 };

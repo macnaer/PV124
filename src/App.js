@@ -35,6 +35,10 @@ class App extends React.Component {
     ],
   };
 
+  onDelete = (id) => {
+    console.log(`On delete ${id}`);
+  };
+
   render() {
     const { List } = this.state;
     return (
@@ -42,7 +46,7 @@ class App extends React.Component {
         <div className="container bootstrap snippets bootdeys bootdey">
           <div className="row decor-default">
             <SideBar List={List} />
-            <ContactList List={List} />
+            <ContactList List={List} onDelete={this.onDelete} />
           </div>
         </div>
       </>
