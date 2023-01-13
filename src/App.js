@@ -40,8 +40,8 @@ class App extends React.Component {
     const { List } = this.state;
     const index = List.findIndex((el) => el.id === id);
     let tmpList = slice(List);
-    const tmpListPart1 = tmpList.splice(0, index);
-    const tmpListPart2 = tmpList.splice(index);
+    const tmpListPart1 = tmpList.slice(0, index);
+    const tmpListPart2 = tmpList.slice(index + 1);
     tmpList = [...tmpListPart1, ...tmpListPart2];
 
     this.setState({

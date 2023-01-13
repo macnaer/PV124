@@ -40,7 +40,7 @@ const ContactList = ({ List, onDelete }) => {
             <div className="field phone">Phone</div>
             <div className="field email icons">Email</div>
           </div>
-          {item}
+          {item.length > 0 ? item : <h3>No contacts found.</h3>}
         </div>
       </div>
     </div>
