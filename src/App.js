@@ -1,4 +1,5 @@
 import "./App.css";
+import { v4 as uuidv4 } from "uuid";
 
 // Import components
 import SideBar from "./contacts/sidebar/sidebar";
@@ -14,7 +15,7 @@ class App extends React.Component {
   state = {
     List: [
       {
-        id: 1,
+        id: uuidv4(),
         name: "Alexander Verdnam",
         phone: "+1-800-600-9898",
         email: "alex@email.com",
@@ -23,7 +24,7 @@ class App extends React.Component {
         category: "Friends",
       },
       {
-        id: 2,
+        id: uuidv4(),
         name: "Emma Watson",
         phone: "+8-800-321-1234",
         email: "emma@email.com",
@@ -32,7 +33,7 @@ class App extends React.Component {
         category: "Private",
       },
       {
-        id: 3,
+        id: uuidv4(),
         name: "Bill Watson",
         phone: "+8-800-321-1234",
         email: "bill@email.com",
@@ -56,6 +57,16 @@ class App extends React.Component {
     });
   };
 
+  onAddNewContact = (newContact) => {
+    const { List } = this.state;
+    let tmpList = List.slice();
+    tmpList.unshift(newContact);
+
+    this.setState({
+      List: tmpList,
+    });
+  };
+
   render() {
     const { List } = this.state;
     return (
@@ -70,7 +81,12 @@ class App extends React.Component {
                   path="/"
                   element={<ContactList List={List} onDelete={this.onDelete} />}
                 />
-                <Route path="/add-contact" element={<AddContact />} />
+                <Route
+                  path="/add-contact"
+                  element={
+                    <AddContact onAddNewContact={this.onAddNewContact} />
+                  }
+                />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </div>
