@@ -8,6 +8,7 @@ import { Routes, Route } from "react-router-dom";
 import { slice } from "lodash";
 import Header from "./contacts/header/header";
 import AddContact from "./contacts/addContact/addContact";
+import NotFound from "./contacts/notFound/notFound";
 
 class App extends React.Component {
   state = {
@@ -70,6 +71,7 @@ class App extends React.Component {
                   element={<ContactList List={List} onDelete={this.onDelete} />}
                 />
                 <Route path="/add-contact" element={<AddContact />} />
+                <Route path="*" element={<NotFound />} />
               </Routes>
             </div>
           </div>
