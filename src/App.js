@@ -4,7 +4,10 @@ import "./App.css";
 import SideBar from "./contacts/sidebar/sidebar";
 import ContactList from "./contacts/contact-list/contact-list";
 import React from "react";
+import { Routes, Route } from "react-router-dom";
 import { slice } from "lodash";
+import Header from "./contacts/header/header";
+import AddContact from "./contacts/addContact/addContact";
 
 class App extends React.Component {
   state = {
@@ -55,14 +58,23 @@ class App extends React.Component {
   render() {
     const { List } = this.state;
     return (
-      <>
-        <div className="container bootstrap snippets bootdeys bootdey">
-          <div className="row decor-default">
-            <SideBar List={List} />
-            <ContactList List={List} onDelete={this.onDelete} />
+      <div className="container bootstrap snippets bootdeys bootdey">
+        <div className="row decor-default">
+          <SideBar List={List} />
+          <div className="col-lg-9 col-md-8 col-sm-12">
+            <div className="contacts-list">
+              <Header />
+              <Routes>
+                <Route
+                  path="/"
+                  element={<ContactList List={List} onDelete={this.onDelete} />}
+                />
+                <Route path="/add-contact" element={<AddContact />} />
+              </Routes>
+            </div>
           </div>
         </div>
-      </>
+      </div>
     );
   }
 }
