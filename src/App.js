@@ -78,6 +78,16 @@ class App extends React.Component {
     });
   };
 
+  onEditContact = (updatedContact) => {
+    const { List } = this.state;
+    const index = List.findIndex((el) => el.id === updatedContact.id);
+    const tmpList = List.slice();
+    tmpList[index] = updatedContact;
+    this.setState({
+      List: tmpList,
+    });
+  };
+
   render() {
     const { List, selectedContact } = this.state;
     return (
@@ -106,7 +116,12 @@ class App extends React.Component {
                 />
                 <Route
                   path="/edit-contact"
-                  element={<EditContact selectedContact={selectedContact} />}
+                  element={
+                    <EditContact
+                      onEditContact={this.onEditContact}
+                      selectedContact={selectedContact}
+                    />
+                  }
                 />
                 <Route path="*" element={<NotFound />} />
               </Routes>

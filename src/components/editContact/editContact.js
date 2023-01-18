@@ -1,15 +1,13 @@
 import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
 
-const EditContact = ({ selectedContact }) => {
-  console.log("EditContact ", selectedContact);
+const EditContact = ({ selectedContact, onEditContact }) => {
   const [name, setName] = useState(selectedContact.name);
   const [phone, setPhone] = useState(selectedContact.phone);
-  const [email, setEmail] = useState("email@email.com");
-  const [avatar, setAvatar] = useState(0);
-  const [gender, setGender] = useState("men");
-  const [category, setCategory] = useState("Friends");
+  const [email, setEmail] = useState(selectedContact.email);
+  const [avatar, setAvatar] = useState(selectedContact.avatar);
+  const [gender, setGender] = useState(selectedContact.gender);
+  const [category, setCategory] = useState(selectedContact.category);
   const [isRedirect, setIsRedicrect] = useState(false);
 
   const onGetName = (event) => {
@@ -34,8 +32,8 @@ const EditContact = ({ selectedContact }) => {
   const onSave = (event) => {
     event.preventDefault();
 
-    const newContact = {
-      id: uuidv4(),
+    const currentContact = {
+      id: selectedContact.id,
       name,
       phone,
       email,
@@ -43,7 +41,7 @@ const EditContact = ({ selectedContact }) => {
       gender,
       category,
     };
-    // onAddNewContact(newContact);
+    onEditContact(currentContact);
     setIsRedicrect(true);
   };
 
