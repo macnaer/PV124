@@ -50,6 +50,8 @@ const AddContact = ({ onAddNewContact }) => {
     return <Navigate to={"/"} />;
   }
 
+  const URL = `https://randomuser.me/api/portraits/${gender}/${avatar}.jpg`;
+
   return (
     <>
       <div className="row">
@@ -131,7 +133,14 @@ const AddContact = ({ onAddNewContact }) => {
             </button>
           </form>{" "}
         </div>
-        <div className="col-5">User information </div>
+        <div className="col-5">
+          <h2>User photo</h2>
+          {avatar >= 0 && avatar <= 99 && avatar !== "" ? (
+            <img src={URL} alt={name} className="img-thumbnail" />
+          ) : (
+            <p>No photo.</p>
+          )}
+        </div>
       </div>
     </>
   );

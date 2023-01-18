@@ -3,6 +3,7 @@ import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 
 import React from "react";
+import { Link } from "react-router-dom";
 
 const GetCaregoryStyle = (category) => {
   let categoryStyle = "lab lab-success field";
@@ -32,6 +33,7 @@ const ContactItem = ({
   avatar,
   gender,
   onDelete,
+  onSelectContact,
 }) => {
   const URL = `https://randomuser.me/api/portraits/${gender}/${avatar}.jpg`;
 
@@ -53,7 +55,16 @@ const ContactItem = ({
       <div className="field phone">{phone}</div>
       <div className="field email">{email}</div>
       <div className="field icons-wrapper">
-        <FontAwesomeIcon icon={faEdit} size="2x" className="icons edit" />
+        <Link to={"/edit-contact"}>
+          {" "}
+          <FontAwesomeIcon
+            icon={faEdit}
+            size="2x"
+            onClick={onSelectContact}
+            className="icons edit"
+          />
+        </Link>
+
         <FontAwesomeIcon
           onClick={onDelete}
           icon={faTrashAlt}

@@ -2,14 +2,15 @@ import "./App.css";
 import { v4 as uuidv4 } from "uuid";
 
 // Import components
-import SideBar from "./contacts/sidebar/sidebar";
-import ContactList from "./contacts/contact-list/contact-list";
+import SideBar from "./components/sidebar/sidebar";
+import ContactList from "./components/contact-list/contact-list";
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { slice } from "lodash";
-import Header from "./contacts/header/header";
-import AddContact from "./contacts/addContact/addContact";
-import NotFound from "./contacts/notFound/notFound";
+import Header from "./components/header/header";
+import AddContact from "./components/addContact/addContact";
+import NotFound from "./components/notFound/notFound";
+import EditContact from "./components/editContact/editContact";
 
 class App extends React.Component {
   state = {
@@ -28,7 +29,7 @@ class App extends React.Component {
         name: "Emma Watson",
         phone: "+8-800-321-1234",
         email: "emma@email.com",
-        avatar: 16,
+        avatar: 17,
         gender: "women",
         category: "Private",
       },
@@ -42,6 +43,7 @@ class App extends React.Component {
         category: "Private",
       },
     ],
+    selectedContact: null,
   };
 
   onDelete = (id) => {
@@ -67,8 +69,17 @@ class App extends React.Component {
     });
   };
 
-  render() {
+  onSelectContact = (id) => {
     const { List } = this.state;
+    const index = List.findIndex((el) => el.id === id);
+    const currentContact = List[index];
+    this.setState({
+      selectedContact: currentContact,
+    });
+  };
+
+  render() {
+    const { List, selectedContact } = this.state;
     return (
       <div className="container bootstrap snippets bootdeys bootdey">
         <div className="row decor-default">
@@ -79,13 +90,23 @@ class App extends React.Component {
               <Routes>
                 <Route
                   path="/"
-                  element={<ContactList List={List} onDelete={this.onDelete} />}
+                  element={
+                    <ContactList
+                      List={List}
+                      onSelectContact={this.onSelectContact}
+                      onDelete={this.onDelete}
+                    />
+                  }
                 />
                 <Route
                   path="/add-contact"
                   element={
                     <AddContact onAddNewContact={this.onAddNewContact} />
                   }
+                />
+                <Route
+                  path="/edit-contact"
+                  element={<EditContact selectedContact={selectedContact} />}
                 />
                 <Route path="*" element={<NotFound />} />
               </Routes>
