@@ -35,7 +35,7 @@ const initialState = {
 
 const ContactListReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "DELETE":
+    case "UPDATE":
       return {
         ...state,
         List: action.payload,

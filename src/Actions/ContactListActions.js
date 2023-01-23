@@ -1,6 +1,6 @@
 export const UpdatedContactAction = (newList) => {
   return {
-    type: "DELETE",
+    type: "UPDATE",
     payload: newList,
   };
 };

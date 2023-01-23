@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
+import { connect } from "react-redux";
+import { UpdatedContactAction } from "../../Actions/ContactListActions";
 
-const AddContact = ({ onAddNewContact }) => {
+const AddContact = ({ List, UpdatedContactAction }) => {
   const [name, setName] = useState("John Doe");
   const [phone, setPhone] = useState("+xx(xx)xx-xx-xxx");
   const [email, setEmail] = useState("email@email.com");
@@ -42,7 +44,8 @@ const AddContact = ({ onAddNewContact }) => {
       gender,
       category,
     };
-    onAddNewContact(newContact);
+    List.unshift(newContact);
+    UpdatedContactAction(List);
     setIsRedicrect(true);
   };
 
@@ -146,4 +149,13 @@ const AddContact = ({ onAddNewContact }) => {
   );
 };
 
-export default AddContact;
+const mapStateToProps = ({ ContactListReducer }) => {
+  const { List } = ContactListReducer;
+  return { List };
+};
+
+const mapDispatchToProps = {
+  UpdatedContactAction,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddContact);

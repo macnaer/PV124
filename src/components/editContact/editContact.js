@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
 import { connect } from "react-redux";
+import { UpdatedContactAction } from "../../Actions/ContactListActions";
 
-const EditContact = ({ selectedContact, onEditContact }) => {
-  console.log("EditContact ", selectedContact);
+const EditContact = ({ selectedContact, List, UpdatedContactAction }) => {
   const [name, setName] = useState(selectedContact.name);
   const [phone, setPhone] = useState(selectedContact.phone);
   const [email, setEmail] = useState(selectedContact.email);
@@ -43,7 +43,10 @@ const EditContact = ({ selectedContact, onEditContact }) => {
       gender,
       category,
     };
-    onEditContact(currentContact);
+    const index = List.findIndex((el) => el.id === selectedContact.id);
+    List[index] = currentContact;
+
+    UpdatedContactAction(List);
     setIsRedicrect(true);
   };
 
@@ -148,8 +151,12 @@ const EditContact = ({ selectedContact, onEditContact }) => {
 };
 
 const mapStateToProps = ({ ContactListReducer }) => {
-  const { selectedContact } = ContactListReducer;
-  return { selectedContact };
+  const { selectedContact, List } = ContactListReducer;
+  return { selectedContact, List };
 };
 
-export default connect(mapStateToProps)(EditContact);
+const mapDispatchToProps = {
+  UpdatedContactAction,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditContact);
