@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 
 function filterItems(arr, query) {
   return arr.filter((el) =>
@@ -42,4 +43,9 @@ const SideBar = ({ List }) => {
   );
 };
 
-export default SideBar;
+const mapStateToProps = ({ ContactListReducer }) => {
+  const { List } = ContactListReducer;
+  return { List };
+};
+
+export default connect(mapStateToProps)(SideBar);

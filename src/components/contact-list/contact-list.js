@@ -1,17 +1,10 @@
 import React from "react";
+import { connect } from "react-redux";
 import ContactItem from "./contact-item/contact-item";
-import Header from "../header/header";
 
-const ContactList = ({ List, onDelete, onSelectContact }) => {
+const ContactList = ({ List }) => {
   const item = List.map((contact) => {
-    return (
-      <ContactItem
-        key={contact.id}
-        {...contact}
-        onDelete={() => onDelete(contact.id)}
-        onSelectContact={() => onSelectContact(contact.id)}
-      />
-    );
+    return <ContactItem key={contact.id} {...contact} />;
   });
 
   return (
@@ -40,4 +33,9 @@ const ContactList = ({ List, onDelete, onSelectContact }) => {
   );
 };
 
-export default ContactList;
+const mapStateToProps = ({ ContactListReducer }) => {
+  const { List } = ContactListReducer;
+  return { List };
+};
+
+export default connect(mapStateToProps)(ContactList);

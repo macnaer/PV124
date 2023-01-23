@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
+import { connect } from "react-redux";
 
 const EditContact = ({ selectedContact, onEditContact }) => {
+  console.log("EditContact ", selectedContact);
   const [name, setName] = useState(selectedContact.name);
   const [phone, setPhone] = useState(selectedContact.phone);
   const [email, setEmail] = useState(selectedContact.email);
@@ -145,4 +147,9 @@ const EditContact = ({ selectedContact, onEditContact }) => {
   );
 };
 
-export default EditContact;
+const mapStateToProps = ({ ContactListReducer }) => {
+  const { selectedContact } = ContactListReducer;
+  return { selectedContact };
+};
+
+export default connect(mapStateToProps)(EditContact);
